@@ -13,11 +13,15 @@ import { Rightside } from './components/styles/Returneddiv.styled';
 
 
 
-
 function App() {
   const [newItem, setNewItem] = useState("")
   const [todos, setTodos] = useState<Array<{ id: string; title: string; completed: boolean; }>>([]);
- 
+  const colors = ['#3C91D2', '#CD3CD2', '#57C341', '#C8BE2F', '#292F25', '#3B1FC6', '#AC7E93']
+  
+  const today = new Date()
+  const dateofpost = new Intl.DateTimeFormat("en-us", {
+    dateStyle: 'short'
+  }).format(today)
   
   
   function handleChange(e: React.SyntheticEvent) {
@@ -66,8 +70,8 @@ function App() {
             <TodoText style={todo.completed ? { textDecoration: "line-through" } : {}}>{todo.title}</TodoText>
               </Leftside>
             <Rightside>
-            <DateBox></DateBox>
-            <DeleteBtn onClick={() => deleteItems(todo.id)}/>
+            <DateBox>{dateofpost}</DateBox>
+            <DeleteBtn onClick={() => deleteItems(todo.id)} color={colors[index % colors.length]}/>
             </Rightside>
           </Box> 
            })}
@@ -80,6 +84,9 @@ function App() {
   
   export default App;
   
+  
+
+
 
 
 
